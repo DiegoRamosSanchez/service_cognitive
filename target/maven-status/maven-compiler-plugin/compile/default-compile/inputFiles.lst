@@ -1,7 +1,10 @@
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/modal/AiQuery.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/repository/AiQueryRepository.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/rest/AiQueryRest.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/modal/QueryRequest.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/service/AiQueryService.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/config/SwaggerConfig.java
-/workspaces/AS222S5_T04_be/src/main/java/pe/edu/vallegrande/spring_reactive/SpringReactiveApplication.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/config/SwaggerConfig.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/service/ChatService.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/rest/ChatController.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/repository/ConversationRepository.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/repository/MessagesRepository.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/SpringReactiveApplication.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/modal/Conversation.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/modal/Users.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/modal/Messages.java
+/workspaces/service_cognitive/src/main/java/pe/edu/vallegrande/spring_reactive/repository/UsersRepository.java

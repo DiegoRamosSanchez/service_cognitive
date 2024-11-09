@@ -1,7 +1,11 @@
-pe/edu/vallegrande/spring_reactive/service/AiQueryService.class
+pe/edu/vallegrande/spring_reactive/service/ChatService.class
+pe/edu/vallegrande/spring_reactive/modal/Conversation.class
 pe/edu/vallegrande/spring_reactive/config/SwaggerConfig.class
-pe/edu/vallegrande/spring_reactive/repository/AiQueryRepository.class
-pe/edu/vallegrande/spring_reactive/modal/QueryRequest.class
-pe/edu/vallegrande/spring_reactive/modal/AiQuery.class
+pe/edu/vallegrande/spring_reactive/rest/ChatController.class
+pe/edu/vallegrande/spring_reactive/rest/MessageRequest.class
+pe/edu/vallegrande/spring_reactive/repository/ConversationRepository.class
 pe/edu/vallegrande/spring_reactive/SpringReactiveApplication.class
-pe/edu/vallegrande/spring_reactive/rest/AiQueryRest.class
+pe/edu/vallegrande/spring_reactive/repository/MessagesRepository.class
+pe/edu/vallegrande/spring_reactive/modal/Users.class
+pe/edu/vallegrande/spring_reactive/repository/UsersRepository.class
+pe/edu/vallegrande/spring_reactive/modal/Messages.class
