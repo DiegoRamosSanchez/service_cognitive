@@ -1,0 +1,7 @@
+pe/edu/vallegrande/spring_reactive/service/AiQueryService.class
+pe/edu/vallegrande/spring_reactive/config/SwaggerConfig.class
+pe/edu/vallegrande/spring_reactive/repository/AiQueryRepository.class
+pe/edu/vallegrande/spring_reactive/modal/QueryRequest.class
+pe/edu/vallegrande/spring_reactive/modal/AiQuery.class
+pe/edu/vallegrande/spring_reactive/SpringReactiveApplication.class
+pe/edu/vallegrande/spring_reactive/rest/AiQueryRest.class

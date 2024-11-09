@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aistudio
+  namespace: vallegrande
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aistudio
+  template:
+    metadata:
+      labels:
+        app: aistudio
+    spec:
+      containers:
+      - name: aistudio
+        image: diegoramos678/spring-test:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          value: "r2dbc:postgresql://ep-flat-silence-a44kj12l.us-east-1.aws.neon.tech:5432/service?sslmode=require"
+        - name: DATABASE_USERNAME
+          value: "service_owner"
+        - name: DATABASE_PASSWORD
+          value: "TXbO5YFWo6GI"
+        - name: API_KEY
+          value: "AIzaSyDO05skHcsky6fyKZMcQoH_40-rmEX9TpE"
+        resources:
+          requests:
+            cpu: "500m"  # Asignación de CPU
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aistudio
+  namespace: vallegrande
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: aistudio
