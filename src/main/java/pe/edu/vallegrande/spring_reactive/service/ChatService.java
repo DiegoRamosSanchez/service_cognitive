@@ -40,11 +40,17 @@ public class ChatService {
         return usersRepository.findAllActive();
     }
 
+    // Métodos para crear Users
     public Mono<Users> createUser(Users user) {
         user.setActive("A");
         user.setCreatedAt(LocalDateTime.now());
         return usersRepository.save(user);
     }
+
+    // Método para obtener todas las conversaciones activas
+    public Flux<Conversation> getAllActiveConversationsByUserId(Long userId) {
+        return conversationRepository.findByUserIdAndActive(userId);
+    }    
 
     // Métodos para Conversations
     public Mono<Conversation> startConversation(Long userId) {
@@ -158,4 +164,8 @@ public class ChatService {
                 .flatMap(message -> updateMessage(message.getId(), newQuery));
     }
     
+    // Método para eliminar lógicamente una conversación
+    public Mono<Void> logicalDeleteConversation(Long conversationId) {
+        return conversationRepository.logicalDelete(conversationId);
+    }
 }

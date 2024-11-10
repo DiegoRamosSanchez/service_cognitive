@@ -30,6 +30,12 @@ public class ChatController {
         return chatService.getAllUsers();
     }
 
+    // Endpoint para obtener todas las conversaciones activas
+    @GetMapping("/users/{userId}/conversations")
+    public Flux<Conversation> getAllActiveConversationsByUserId(@PathVariable Long userId) {
+        return chatService.getAllActiveConversationsByUserId(userId);
+    }
+
     // Endpoints para Conversations
     @PostMapping("/conversations/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,6 +76,12 @@ public class ChatController {
     @GetMapping("/conversations/{conversationId}/messages")
     public Flux<Messages> getConversationHistory(@PathVariable Long conversationId) {
         return chatService.getConversationHistory(conversationId);
+    }
+
+    // Endpoint para eliminar lógicamente una conversación
+    @PutMapping("/conversations/{conversationId}/delete")
+    public Mono<Void> logicalDeleteConversation(@PathVariable Long conversationId) {
+        return chatService.logicalDeleteConversation(conversationId);
     }
 }
 
