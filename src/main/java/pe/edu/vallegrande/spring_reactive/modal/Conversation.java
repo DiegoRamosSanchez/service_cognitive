@@ -16,6 +16,7 @@ public class Conversation {
     @Id
     private Long id;
     private Long userId;
+    private String title;
     private LocalDateTime startTime = LocalDateTime.now();
     private LocalDateTime endTime;
     private String active;

@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@CrossOrigin( origins = "*" )
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/chat")
 @RequiredArgsConstructor
 public class ChatController {
@@ -70,7 +70,16 @@ public class ChatController {
     public Mono<Messages> sendMessage(
             @PathVariable Long conversationId,
             @RequestBody MessageRequest request) {
-        return chatService.processMessage(conversationId, request.query());
+        return chatService.processMessage(conversationId, request.query())
+                .onErrorResume(e -> {
+                    // Manejo de errores: retornar un mensaje de error
+                    Messages errorMessage = new Messages();
+                    errorMessage.setConversationId(conversationId);
+                    errorMessage.setQuery(request.query());
+                    errorMessage.setResponse("Error: " + e.getMessage());
+                    errorMessage.setActive("A");
+                    return Mono.just(errorMessage);
+                });
     }
 
     @GetMapping("/conversations/{conversationId}/messages")
@@ -80,9 +89,25 @@ public class ChatController {
 
     // Endpoint para eliminar lógicamente una conversación
     @PutMapping("/conversations/{conversationId}/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> logicalDeleteConversation(@PathVariable Long conversationId) {
         return chatService.logicalDeleteConversation(conversationId);
+    }
+
+    // Manejador de excepciones global para el controlador
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Mono<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return Mono.just(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Mono<ErrorResponse> handleException(Exception ex) {
+        return Mono.just(new ErrorResponse("Error interno del servidor: " + ex.getMessage()));
     }
 }
 
 record MessageRequest(String query) {}
+
+record ErrorResponse(String message) {}
