@@ -3,7 +3,6 @@ package pe.edu.vallegrande.spring_reactive.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.vallegrande.spring_reactive.modal.Users;
 import pe.edu.vallegrande.spring_reactive.modal.Conversation;
 import pe.edu.vallegrande.spring_reactive.modal.Messages;
 import pe.edu.vallegrande.spring_reactive.service.ChatService;
@@ -17,18 +16,6 @@ import reactor.core.publisher.Mono;
 public class ChatController {
     
     private final ChatService chatService;
-
-    // Endpoints para Users
-    @PostMapping("/users")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Users> createUser(@RequestBody Users user) {
-        return chatService.createUser(user);
-    }
-
-    @GetMapping("/users")
-    public Flux<Users> getAllUsers() {
-        return chatService.getAllUsers();
-    }
 
     // Endpoint para obtener todas las conversaciones activas
     @GetMapping("/users/{userId}/conversations")

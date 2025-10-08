@@ -7,10 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pe.edu.vallegrande.spring_reactive.modal.Users;
 import pe.edu.vallegrande.spring_reactive.modal.Conversation;
 import pe.edu.vallegrande.spring_reactive.modal.Messages;
-import pe.edu.vallegrande.spring_reactive.repository.UsersRepository;
 import pe.edu.vallegrande.spring_reactive.repository.ConversationRepository;
 import pe.edu.vallegrande.spring_reactive.repository.MessagesRepository;
 import reactor.core.publisher.Flux;
@@ -24,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ChatService {
 
-    private final UsersRepository usersRepository;
     private final ConversationRepository conversationRepository;
     private final MessagesRepository messagesRepository;
+    private final UserService userService;
 
     // Cliente OkHttp con timeouts configurados
     private final OkHttpClient client = new OkHttpClient.Builder()
@@ -41,18 +39,6 @@ public class ChatService {
     @Value("${gemini.api.url}")
     private String apiUrl;
 
-    // Métodos para Users
-    public Flux<Users> getAllUsers() {
-        return usersRepository.findAllActive();
-    }
-
-    // Métodos para crear Users
-    public Mono<Users> createUser(Users user) {
-        user.setActive("A");
-        user.setCreatedAt(LocalDateTime.now());
-        return usersRepository.save(user);
-    }
-
     // Método para obtener todas las conversaciones activas
     public Flux<Conversation> getAllActiveConversationsByUserId(Long userId) {
         return conversationRepository.findByUserIdAndActive(userId);
@@ -60,8 +46,7 @@ public class ChatService {
 
     // Métodos para Conversations
     public Mono<Conversation> startConversation(Long userId) {
-        return usersRepository.findById(userId)
-                .filter(user -> "A".equals(user.getActive()))
+        return userService.findById(userId)
                 .flatMap(user -> {
                     Conversation conversation = new Conversation();
                     conversation.setUserId(userId);
