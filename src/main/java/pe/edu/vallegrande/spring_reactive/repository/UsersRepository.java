@@ -9,11 +9,15 @@ import reactor.core.publisher.Mono;
 public interface UsersRepository extends ReactiveCrudRepository<Users, Long> {
 
     @Query("SELECT * FROM users WHERE active = 'A'")
-    public Flux<Users> findAllActive();  // Asegúrate de que sea público
+    Flux<Users> findAllActive();
 
     @Query("SELECT * FROM users WHERE email = :email AND active = 'A'")
-    public Mono<Users> findByEmailAndActive(String email);
+    Mono<Users> findByEmailAndActive(String email);
 
     @Query("UPDATE users SET active = 'I' WHERE id = :id")
-    public Mono<Void> logicalDelete(Long id);
+    Mono<Void> logicalDelete(Long id);
+    
+    // Nuevo método para verificar si el email ya existe
+    @Query("SELECT COUNT(*) > 0 FROM users WHERE email = :email")
+    Mono<Boolean> existsByEmail(String email);
 }
