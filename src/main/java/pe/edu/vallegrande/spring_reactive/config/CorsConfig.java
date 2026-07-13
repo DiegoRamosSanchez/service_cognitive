@@ -18,7 +18,7 @@ public class CorsConfig {
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "https://cashdigital.netlify.app",
+                "https://chatterworld.netlify.app",
                 "http://localhost:4200" // opcional, para pruebas locales
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
