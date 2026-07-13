@@ -1,11 +1,7 @@
-FROM openjdk:17-jdk
+FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 COPY target/*.jar app.jar
-
-ENV DATABASE_URL ${DATABASE_URL}
-ENV DATABASE_USERNAME ${DATABASE_USERNAME}
-ENV DATABASE_PASSWORD ${DATABASE_PASSWORD}
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
