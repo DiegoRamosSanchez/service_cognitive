@@ -136,9 +136,10 @@ public class ChatService {
         RequestBody body = RequestBody.create(mediaType, jsonBody);
 
         Request request = new Request.Builder()
-                .url(apiUrl + "?key=" + apiKey)
+                .url(apiUrl)
                 .post(body)
                 .addHeader("Content-Type", "application/json")
+                .addHeader("X-goog-api-key", apiKey)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
